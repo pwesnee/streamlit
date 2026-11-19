@@ -17,3 +17,9 @@ if uploaded_file:
     real_img = PILImage.create(uploaded_file)
     resized_img = real_img.resize((224, 224), Image.NEAREST)
     prediction = cat_vs_dog_model.predict(resized_img)
+    index = prediction[1]
+    confidence_levels = prediction[2]
+    confidence_level = confidence_levels[index]
+    confidence_level = confidence_level * 100
+    st.text(f"{prediction[0]} - {confidence_level}")
+    st.image(uploaded_file)
